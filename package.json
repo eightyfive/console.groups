@@ -1,6 +1,6 @@
 {
   "name": "console.groups",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "scripts": {
     "test": "jest",
     "release": "np --no-2fa --no-draft-release"
