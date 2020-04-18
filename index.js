@@ -1,6 +1,7 @@
 module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
   for (const [title, vars] of Object.entries(groups)) {
     count++;
+
     const closed = Array.isArray(collapsed) ? collapsed[count] : collapsed;
 
     console[closed ? "groupCollapsed" : "group"](title);
@@ -14,10 +15,12 @@ module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
       vars !== null &&
       vars.constructor === Object
     ) {
-      grouper(vars, collapsed, count);
+      count = consoleGroups(vars, collapsed, count);
     } else {
       console.log(vars);
     }
     console.groupEnd();
   }
+
+  return count;
 };
