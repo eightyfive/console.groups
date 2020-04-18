@@ -86,3 +86,15 @@ test("Complex", () => {
   expect(group).toHaveBeenCalledTimes(3);
   expect(log).toHaveBeenCalledTimes(7);
 });
+
+test("Skip group", () => {
+  consoleGroups({
+    "Title 1": {
+      "0": [1, 2],
+      "Title 2": 1,
+    },
+  });
+
+  expect(groupCollapsed).toHaveBeenCalledTimes(2);
+  expect(log).toHaveBeenCalledTimes(3);
+});
