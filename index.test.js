@@ -98,3 +98,24 @@ test("Skip group", () => {
   expect(groupCollapsed).toHaveBeenCalledTimes(2);
   expect(log).toHaveBeenCalledTimes(3);
 });
+
+test("Unicorn title", () => {
+  consoleGroups({
+    "{red}Red title": 1,
+  });
+
+  expect(groupCollapsed).toHaveBeenCalledWith("%cRed title", "color: red");
+  expect(log).toHaveBeenCalledTimes(1);
+});
+
+test("Unicorn value", () => {
+  consoleGroups({
+    "Title 1": "{bold; green}I am hulk",
+  });
+
+  expect(groupCollapsed).toHaveBeenCalledWith("Title 1");
+  expect(log).toHaveBeenCalledWith(
+    "%cI am hulk",
+    "font-weight: bold; color: green"
+  );
+});
