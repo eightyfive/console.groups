@@ -4,9 +4,9 @@ const reNumeric = /^\d$/;
 
 module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
   for (const [key, vars] of Object.entries(groups)) {
-    const isGroup = !reNumeric.test(key);
+    const isNum = reNumeric.test(key);
 
-    if (isGroup) {
+    if (!isNum) {
       count++;
 
       const closed = Array.isArray(collapsed) ? collapsed[count] : collapsed;
@@ -20,6 +20,7 @@ module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
     }
 
     if (
+      !isNum &&
       typeof vars === "object" &&
       vars !== null &&
       vars.constructor === Object
@@ -37,7 +38,7 @@ module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
       }
     }
 
-    if (isGroup) {
+    if (!isNum) {
       console.groupEnd();
     }
   }
