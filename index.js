@@ -9,7 +9,14 @@ module.exports = function consoleGroups(groups, collapsed = true, count = -1) {
     if (!isNum) {
       count++;
 
-      const closed = Array.isArray(collapsed) ? collapsed[count] : collapsed;
+      let closed;
+
+      if (Array.isArray(collapsed)) {
+        closed = collapsed[count] || typeof collapsed[count] === "undefined";
+      } else {
+        closed = collapsed;
+      }
+
       const title = unicorn(key);
 
       if (closed) {
